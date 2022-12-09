@@ -2,6 +2,19 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const http = require('http').Server(app);
+const mongoose = require("mongoose")
+const bodyParser = require("body-parser")
+const mongodbConnString = "mongodb+srv://Shoregill:tickle1973@cluster0.ov8cmws.mongodb.net/?retryWrites=true&w=majority"
+
+mongoose.connect(mongodbConnString)
+mongoose.connection.on("error", function(error) {
+  console.log(error)
+} )
+
+mongoose.connection.on("open", function() {
+  console.log("Successfully connected!")
+} )
+
 const PORT = 4000
 const socketIO = require('socket.io')(http, {
     cors: {
